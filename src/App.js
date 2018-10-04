@@ -28,14 +28,18 @@ class BooksApp extends React.Component {
     });
   };
 
-  updateBook = (id, type) => {
-    this.loader();
-    BooksAPI.update(id, type).then(books => {
-      this.getBooks(this.loader);
-    });
+  updateBook = obj => {
+    if (obj.id && obj.type) {
+      this.loader();
+
+      BooksAPI.update(obj.id, obj.type).then(books => {
+        this.getBooks(this.loader);
+      });
+    }
   };
 
   render() {
+    console.log('render', this.state.books);
     return (
       <Fragment>
         {this.state.loader && <Loader />}

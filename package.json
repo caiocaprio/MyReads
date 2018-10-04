@@ -5,8 +5,10 @@
     "react-dom": "^16.3.2"
   },
   "devDependencies": {
+    "escape-string-regexp": "^1.0.5",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "sort-by": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
