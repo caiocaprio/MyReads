@@ -8,7 +8,7 @@ import './App.css';
 
 class BooksApp extends React.Component {
   state = {
-    books: [],
+    myBooks: [],
     loader: true
   };
 
@@ -16,15 +16,23 @@ class BooksApp extends React.Component {
     this.getBooks(this.loader);
   }
 
-  loader = () => {
-    this.setState({ loader: !this.state.loader });
+  loader = (show = true) => {
+    this.setState({ loader: show });
   };
 
   getBooks = (callback = null) => {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books }, () => {
-        callback && callback();
+    BooksAPI.getAll().then(myBooks => {
+      this.setState({ myBooks }, () => {
+        callback && callback(false);
       });
+    });
+  };
+
+  getBookSearch = (word, callback) => {
+    this.loader();
+    BooksAPI.search(word).then(books => {
+      this.loader(false);
+      callback && callback(books);
     });
   };
 
@@ -39,7 +47,6 @@ class BooksApp extends React.Component {
   };
 
   render() {
-    console.log('render', this.state.books);
     return (
       <Fragment>
         {this.state.loader && <Loader />}
@@ -55,7 +62,13 @@ class BooksApp extends React.Component {
             <Route
               exact
               path="/search"
-              render={() => <Search {...this.state} />}
+              render={() => (
+                <Search
+                  {...this.state}
+                  searchBook={this.getBookSearch}
+                  updateBook={this.updateBook}
+                />
+              )}
             />
           </Switch>
         </Router>
