@@ -8,8 +8,12 @@ To run the project you need:
 
 #### install modules
 
-`npm i`
+```sh
+npm i
+```
 
 #### Start Project
 
-npm start`
+```sh
+npm start
+```
