@@ -1,6 +1,13 @@
 import React from 'react';
 import * as ACTION from '../../actions';
 
+/**
+ * getBooksType
+ * Filter the books on the shelf
+ * @param {*} books
+ * @param {*} type
+ * @returns
+ */
 export const getBooksType = (books, type) => {
   const _books = books.filter((item, x) => {
     return item.shelf === type;
@@ -8,6 +15,14 @@ export const getBooksType = (books, type) => {
   return _books.length > 0 ? _books : false;
 };
 
+/**
+ * ListBooks
+ * Renders the visual component with the listing of the books in case the book already exists in myBooks would not repeat in the listing.
+ * @param {*} books
+ * @param {*} onUpdate
+ * @param {*} [myBooks=[]]
+ * @returns
+ */
 const ListBooks = (books, onUpdate, myBooks = []) => {
   return books
     ? books.map((item, i) => {

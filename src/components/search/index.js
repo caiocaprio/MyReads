@@ -5,12 +5,22 @@ import sortBy from 'sort-by';
 import ListBooks, { getBooksType } from '../books/list-books';
 import * as ACTION from '../../actions';
 class Search extends Component {
+  /**
+   * state
+   * state of component.
+   * @memberof Search
+   */
   state = {
     query: '',
     books: [],
     timerKey: 0
   };
 
+  /**
+   * UpdateQuery
+   * Updates timer status in 500ms not to call each key pressed.
+   * @memberof Search
+   */
   updateQuery = query => {
     clearTimeout(this.state.timerKey);
     if (query !== '') {
@@ -24,6 +34,11 @@ class Search extends Component {
     }
   };
 
+  /**
+   * onSearchBook
+   * Calls the method of the parent and arrow the state in the callback receiving the props and the query that was sent.
+   * @memberof Search
+   */
   onSearchBook = query => {
     this.props.searchBook &&
       this.props.searchBook(query, books => {
@@ -31,14 +46,30 @@ class Search extends Component {
       });
   };
 
+  /**
+   * clearQuery
+   * Reset state query.
+   * @memberof Search
+   */
   clearQuery = () => {
     this.setState({ query: '' });
   };
 
+  /**
+   * onChangeInput
+   * Each pressed key triggers the method updateQuery passing the query entered.
+   * @memberof Search
+   */
   onChangeInput = e => {
     this.updateQuery(e.target.value);
   };
 
+  /**
+   * render
+   * Renders the visual component.
+   * @returns
+   * @memberof Search
+   */
   render() {
     const { query, books } = this.state;
     const { myBooks, updateBook } = this.props;

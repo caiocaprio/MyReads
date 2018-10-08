@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import * as ACTION from '../../actions';
 import ListBooks, { getBooksType } from './list-books';
 
+/**
+ * Books
+ * Renders the visual component, needs myBooks properties, and updateBook event.
+ * @param {*} props
+ * @returns
+ */
 const Books = props => {
   return (
     <Fragment>

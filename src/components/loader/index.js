@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * Loader
+ * Renders the visual component of the loader
+ * @returns
+ */
 const Loader = () => {
   return (
     <div className="loader">

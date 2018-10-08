@@ -12,22 +12,42 @@ class BooksApp extends React.Component {
     loader: true
   };
 
+  /**
+   * componentDidMount
+   * Runs after first render by calling book listing.
+   * @memberof BooksApp
+   */
   componentDidMount() {
     this.getBooks(this.loader);
   }
 
+  /**
+   * loader
+   * set the visible or invisible loader.
+   * @memberof BooksApp
+   */
   loader = (show = true) => {
     this.setState({ loader: show });
   };
 
+  /**
+   * getBooks
+   * Calls API by bringing the books listing from the bookshelf and arrows the state of the component with the books and triggers a callback.
+   * @memberof BooksApp
+   */
   getBooks = (callback = null) => {
     BooksAPI.getAll().then(myBooks => {
       this.setState({ myBooks }, () => {
-        callback && callback(false);
+        callback && callback();
       });
     });
   };
 
+  /**
+   * getBookSearch
+   * Activates loader, calls search api and triggers callback with search books.
+   * @memberof BooksApp
+   */
   getBookSearch = (word, callback) => {
     this.loader();
     BooksAPI.search(word).then(books => {
@@ -36,16 +56,29 @@ class BooksApp extends React.Component {
     });
   };
 
+  /**
+   * updateBook
+   * Calls api to fill a book to his bookshelf, receives an object with `id` and `type`.
+   * @memberof BooksApp
+   */
   updateBook = obj => {
     if (obj.id && obj.type) {
       this.loader();
 
       BooksAPI.update(obj.id, obj.type).then(books => {
-        this.getBooks(this.loader);
+        this.getBooks(() => {
+          this.loader(false);
+        });
       });
     }
   };
 
+  /**
+   * render
+   * Renders the visual component.
+   * @returns
+   * @memberof BooksApp
+   */
   render() {
     return (
       <Fragment>
