@@ -9,7 +9,7 @@ import './App.css';
 class BooksApp extends React.Component {
   state = {
     myBooks: [],
-    loader: true
+    loader: false
   };
 
   /**
@@ -18,7 +18,10 @@ class BooksApp extends React.Component {
    * @memberof BooksApp
    */
   componentDidMount() {
-    this.getBooks(this.loader);
+    this.loader(true);
+    this.getBooks(() => {
+      this.loader(false);
+    });
   }
 
   /**
